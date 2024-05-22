@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js" integrity="sha512-42PE0rd+wZ2hNXftlM78BSehIGzezNeQuzihiBCvUEB3CVxHvsShF86wBWwQORNxNINlBPuq7rG4WWhNiTVHFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+    <style>
+        body{
+            background: linear-gradient(-30deg,  #e0ffff, #4FA3F0);
+            margin: 0;
+        }
+        .puzzle{
+            background-color: #4FA3F0;
+            background: linear-gradient(-30deg,  #e0ffff, #4FA3F0);
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: calc(100% - 150px);
+        }
+        .item_boxes{
+            background: linear-gradient(-30deg, #fff4e0, #EAD898);
+            width: 100%;
+            height: 150px;
+            left: 0;
+            bottom: 0;
+            position: absolute;
+            display: flex;
+            border-radius: 10px 10px 0 0;
+            border-top: 8px solid #b59668;
+        }
+        .item_container{
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .item_box{
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+        }
+        .item_1{
+            background-color: #FDCD84;
+            border: 5px solid #866C45;
+            border-radius: 10px;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.5s;
+        }
+        #sun_ic{
+            position: absolute;
+            left: 50%;
+            top: 65%;
+            transform: translate(-50%,0);
+            transition: transform 0.8s ease-in-out;
+            display: block;
+        }
+        #bad_cloud_ic{
+            position: absolute;
+            left: 50%;
+            top: 10%;
+            transform: translate(-50%,0);
+            transition: transform 0.8s ease-in-out;
+            display: none;
+        }
+        #dust_ic{
+            position: absolute;
+            left: 66%;
+            top: 80%;
+            transition: transform 0.8s ease-in-out;
+            display: none;
+        }
+        #super_dust_ic{
+            position: absolute;
+            left: 6%;
+            top: 65%;
+            transition: transform 0.8s ease-in-out;
+            display: none;
+        }
+        #umb_ic{
+            position: absolute;
+            left: 40%;
+            top: 43%;
+            transform: rotate(-55deg);
+            transition: transform 0.8s ease-in-out;
+            display: none;
+        }
+        #item_icon1{
+            display: none;
+        }
+        #item_icon2{
+            display: none;
+        }
+        #item_icon3{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="puzzle">
+        <img id="bad_cloud_ic" src="./image/bad_cloud.png" width="350"/>
+        <img id="dust_ic" src="./image/dust.png" width="120px"/>
+        <img id="super_dust_ic" src="./image/sdust.png" width="100px"/>
+        <img id="umb_ic" src="./image/umb.png" width="200px"/>
+        <img id="sun_ic" src="./image/01d.png" width="200px"/>
+    </div>
+    <div class="item_boxes">
+        <div class="item_container">
+            <div class="item_box">
+                <div class="item_1">
+                    <img id="item_icon1" src="./image/umb.png" width="50px"/>
+                </div>
+            </div>
+        </div>
+        <div class="item_container">
+            <div class="item_box">
+                <div class="item_1">
+                    <img id="item_icon2" src="./image/northface.png" width="50px"/>
+                </div>
+            </div>
+        </div>
+        <div class="item_container">
+            <div class="item_box">
+                <div class="item_1">
+                    <img id="item_icon3" src="./image/mask.png" width="50px"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+<script>
+    $(function() {
+        sun_move();
+
+        bad_move();
+        dust_move();
+        sdust_move();
+    });
+    function enter_main() {
+            window.location.href = 'main.html';
+        }
+    function sun_move() {
+            const sun = $('#sun_ic');
+            
+            function animate() {
+                sun.animate({'margin-top': -5}, 400).animate({'margin-top': 0}, 400)
+
+                setTimeout(animate, 800);
+            }
+
+        animate();
+    }
+
+    function bad_move() {
+            const bad_c = $('#bad_cloud_ic');
+            
+            function animate() {
+                bad_c.animate({'margin-top': -5}, 500).animate({'margin-top': 0}, 500)
+                setTimeout(animate, 1000);
+            }
+
+        animate();
+    }
+    function dust_move() {
+            const dust_c = $('#dust_ic');
+            
+            function animate() {
+                dust_c.animate({'margin-left': 10}, 500).animate({'margin-left': 0}, 500)
+                setTimeout(animate, 1000);
+            }
+
+        animate();
+    }
+    function sdust_move() {
+            const sdust_c = $('#super_dust_ic');
+            
+            function animate() {
+                sdust_c.animate({'margin-left': -10}, 500).animate({'margin-left': 0}, 500)
+                setTimeout(animate, 1000);
+            }
+
+        animate();
+    }
+    
+    
+
+    let pressed1 = false
+    let pressed2 = false
+    let pressed3 = false
+    let myRepeat
+
+    function stop_item_move1() {
+        clearTimeout(myRepeat)
+        $('#item_icon1').css('transform', 'scale(1, 1)')
+        pressed1 = false
+    }
+    function stop_item_move2() {
+        clearTimeout(myRepeat)
+        $('#item_icon2').css('transform', 'scale(1, 1)')
+        pressed2 = false
+    }
+    function stop_item_move3() {
+        clearTimeout(myRepeat)
+        $('#item_icon3').css('transform', 'scale(1, 1)')
+        pressed3 = false
+    }
+
+    $('#item_icon1').on('touchstart', function(e){
+        if (e.type === 'touchstart') {
+            stop_item_move2()
+            stop_item_move3()
+            if(pressed1 == true){
+                pressed1 = false;
+            }
+            else{
+                pressed1 = true;
+            }
+        }
+    });
+    $('#item_icon1').on('touchend', function(e){
+        let bubble = $(this)
+
+        if (e.type === 'touchend') {
+            if(pressed1 == true){
+                bubble.css('transform', 'scale(1.5, 1.5)')
+            }
+            else if(pressed1 == false){
+                bubble.css('transform', 'scale(1, 1)')
+            }
+        }
+    });
+    $('#item_icon2').on('touchstart', function(e){
+        if (e.type === 'touchstart') {
+            stop_item_move1()
+            stop_item_move3()
+            if(pressed2 == true){
+                pressed2 = false;
+            }
+            else{
+                pressed2 = true;
+            }
+        }
+    });
+    $('#item_icon2').on('touchend', function(e){
+        let bubble = $(this)
+
+        if (e.type === 'touchend') {
+            if(pressed2 == true){
+                bubble.css('transform', 'scale(1.5, 1.5)')
+            }
+            else if(pressed2 == false){
+                bubble.css('transform', 'scale(1, 1)')
+            }
+        }
+    });
+    $('#item_icon3').on('touchstart', function(e){
+        if (e.type === 'touchstart') {
+            stop_item_move1()
+            stop_item_move2()
+            if(pressed3 == true){
+                pressed3 = false;
+            }
+            else{
+                pressed3 = true;
+            }
+        }
+    });
+    $('#item_icon3').on('touchend', function(e){
+        let bubble = $(this)
+
+        if (e.type === 'touchend') {
+            if(pressed3 == true){
+                bubble.css('transform', 'scale(1.5, 1.5)')
+            }
+            else if(pressed3 == false){
+                bubble.css('transform', 'scale(1, 1)')
+            }
+        }
+    });
+    $('.puzzle').on('touchstart', function(e){
+        
+        if (e.type === 'touchstart') {
+            if(pressed1){
+                if($('#item_icon1').css('display') == "block"){
+                    $('#umb_ic').css('display','block')
+                    $('#item_icon1').css('display','none')
+                }
+            }
+            if(pressed2){
+                if($('#item_icon2').css('display') == "block"){
+                    if($('#sun_ic').attr('src') == "./image/cold_mask_sun.png"){
+                        $('#sun_ic').attr('src','./image/sad_mask_sun.png')
+                    }
+                    else if($('#sun_ic').attr('src') == "./image/cold_sun.png"){
+                        $('#sun_ic').attr('src','./image/sad_sun.png')
+                    }
+                    $('#item_icon2').css('display','none')
+                }
+            }
+            if(pressed3){
+                if($('#item_icon3').css('display') == "block"){
+                    if($('#sun_ic').attr('src') == "./image/cold_sun.png"){
+                        $('#sun_ic').attr('src','./image/cold_mask_sun.png')
+                    }
+                    else if($('#sun_ic').attr('src') == "./image/sad_sun.png"){
+                        $('#sun_ic').attr('src','./image/sad_mask_sun.png')
+                    }
+                    $('#item_icon3').css('display','none')
+                }
+            }
+            if($('#item_icon1').css('display') == 'none' && $('#item_icon2').css('display') == 'none' && $('#item_icon3').css('display') == 'none'){
+                if($('#dust_ic').css('display') == 'none'){
+                    $('#sun_ic').attr('src','./image/01d.png')
+                }
+                else{
+                    $('#sun_ic').attr('src','./image/mask_sun.png')
+                }
+                setTimeout( function(){
+                    enter_main()
+                }, 1000 );
+            }
+            stop_item_move1()
+            stop_item_move2()
+            stop_item_move3()
+        }
+    });
+
+    moment.locale('ko') // moment 한글 설정
+    let url = 'https://api.openweathermap.org/data/2.5/weather?lat=37.34&lon=126.73&appid=5450a1fb3938877a0d94e2ffcfb85649&units=metric'
+    let urlD = 'https://api.openweathermap.org/data/2.5/air_pollution?lat=37.34&lon=126.73&appid=5450a1fb3938877a0d94e2ffcfb85649&units=metric&lang=kr'
+
+    let now_weather = false
+    let temp_sub = false
+    let now_air = false
+    
+    let rainy = ["09","10","11"]
+
+    $.getJSON(url, function(data) {
+        let temp_min = data.main.temp_min
+        let temp_max = data.main.temp_max
+        if(temp_max.toFixed() == "-0"){
+            temp_max = 0
+        }
+        if(temp_min.toFixed() == "-0"){
+            temp_min = 0
+        }
+        if((Number(temp_max.toFixed()) - Number(temp_min.toFixed())) >= 10){
+            temp_sub = true
+        }
+
+        let wea_ic = (data.weather[0].icon).substr(0,2) // 01
+
+        if(rainy.includes(wea_ic)){
+            now_weather = true
+        }
+        $.getJSON(urlD, function(data) {
+
+        let dust = data.list[0].components.pm10
+        let sdust = data.list[0].components.pm2_5
+
+        if((Number(dust.toFixed()) >= 36) || (Number(sdust.toFixed()) >= 36)){
+            now_air = true
+        }
+        // 로그인 화면 아이템 테스트용
+        // now_weather = true
+        // temp_sub = true
+        // now_air = true
+        
+        if(now_weather){
+            $('#bad_cloud_ic').css('display','block')
+            $('#umb_ic').css('display','none')
+            $('#item_icon1').css('display','block')
+            $('#sun_ic').attr('src','./image/sad_sun.png')
+        }
+        if(temp_sub){
+            $('#item_icon2').css('display','block')
+            $('#sun_ic').attr('src','./image/cold_sun.png')
+        }
+        if(now_air){
+            if($('#sun_ic').attr('src') == "./image/01d.png"){
+                $('#sun_ic').attr('src','./image/sad_sun.png')
+            }
+            $('#dust_ic').css('display','block')
+            $('#super_dust_ic').css('display','block')
+            $('#item_icon3').css('display','block')
+        }
+        })
+    })
+    // 일교차 심한 기준 최고최저 10도 이상 차이날떄
+</script>
+</html>
